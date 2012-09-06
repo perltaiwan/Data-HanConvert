@@ -14,7 +14,7 @@ The data table for converting between simple and traditional Chinese.
 若一列中以 `#` 字符為起首，則該列的內容也會被忽略，不計為對照表內容。編修者可利用
 以此方式在檔案中加入註解。
 
-## License
+## License: CC0
 
 <p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
   <a rel="license"
