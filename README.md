@@ -14,6 +14,13 @@ The data table for converting between simple and traditional Chinese.
 若一列中以 `#` 字符為起首，則該列的內容也會被忽略，不計為對照表內容。編修者可利用
 以此方式在檔案中加入註解。
 
+注意：正簡對照並非完美一對一對應，`hanconvert.txt` 應可以容許單一詞出現多重對應，
+撰寫處理程式時應理解此點，並依情境所需選擇適當的處理方式。
+
+## 編修權限
+
+如果需要編修權限，請將 github 帳號告知 @gugod 。
+
 ## License: CC0
 
 <p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
