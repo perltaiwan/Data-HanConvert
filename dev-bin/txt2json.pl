@@ -20,7 +20,8 @@ my $dist_root = realpath( io->catdir($FindBin::Bin, "..") );
 my $txt_io = io->catfile($dist_root, "src", "hanconvert.txt")->utf8->chomp;
 
 my $hanconvert_array = [];
-while(my $line = $txt_io->getline) {
+while(defined(my $line = $txt_io->getline)) {
+    next if $line =~ /^(#|\s*$)/;
     my ($tc, $sc) = split " ", $line;
     push @$hanconvert_array, [$tc, $sc];
 }
