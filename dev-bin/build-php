@@ -32,11 +32,55 @@ function cn2tw_table() {
 function tw2cn_table() {
     return <?= var_export($tw2cn,true) ?>;
 }
+
+function to_tw($s,$mb = true) {
+    $big5 = <?= var_export($big5,true) ?>;
+    $cn   = <?= var_export($cn,true) ?>;
+    $s2 = '';
+    if( $mb ) {
+        $n = mb_strlen($s);
+        for( $i=0; $i < $n; $i++)
+        {
+            $s1 = mb_substr($s,$i,1);
+            $p = mb_strpos($cn,$s1);
+            if ( $p !== false ) {
+                $ch = mb_substr($big5, $p,1);
+                $s2 = $s2.$ch;
+            } else {
+                $s2 = $s2.$s1;
+            }
+        }
+        return $s2;
+    } else {
+        $n = strlen($s);
+        $s2 = '';
+        for($i=0;$i<$n;$i++)
+        {
+            $t=ord(substr($s,$i,1));
+            if($t>=128)//中文字一次取3個
+            {
+                $s1=substr($s,$i,3);
+                if(strpos($cn,$s1)>0)//簡體字中有就用簡體字
+                    $s2=$s2.substr($big5,strpos($cn,$s1),3);
+                else
+                    $s2=$s2.$s1;
+                $i=$i+2;
+            }
+            else
+            {
+                $s1=substr($s,$i,1);
+                $s2=$s2.$s1;
+            }
+        }
+        return $s2;
+    }
+
+}
+
 function to_cn($s,$mb = true) {
     $big5 = <?= var_export($big5,true) ?>;
     $cn   = <?= var_export($cn,true) ?>;
     $s2 = '';
-    
     if( $mb ) {
         $n = mb_strlen($s);
         for( $i=0; $i < $n; $i++)
