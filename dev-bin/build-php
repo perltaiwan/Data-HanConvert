@@ -4,8 +4,6 @@ mb_internal_encoding('utf-8');
 $cn2tw = json_decode(file_get_contents('share/hanconvert_cn2tw_hash.json'),true);
 $tw2cn = json_decode(file_get_contents('share/hanconvert_tw2cn_hash.json'),true);
 
-
-
 print "building character convert function\n";
 $charactersContent = file('src/characters.txt');
 
@@ -26,16 +24,22 @@ ob_start();
 echo '<?';
 echo "php\n";
 ?>
-function cn2tw_table() {
+function get_cn2tw_table() {
     return <?= var_export($cn2tw,true) ?>;
 }
-function tw2cn_table() {
+function get_tw2cn_table() {
     return <?= var_export($tw2cn,true) ?>;
 }
 
 function to_tw($s,$mb = true) {
     $big5 = <?= var_export($big5,true) ?>;
     $cn   = <?= var_export($cn,true) ?>;
+
+    $dicts = get_cn2tw_table();
+    foreach( $dicts as $key => $val ) {
+        $s = str_replace($key,$val,$s);
+    }
+
     $s2 = '';
     if( $mb ) {
         $n = mb_strlen($s);
@@ -80,6 +84,12 @@ function to_tw($s,$mb = true) {
 function to_cn($s,$mb = true) {
     $big5 = <?= var_export($big5,true) ?>;
     $cn   = <?= var_export($cn,true) ?>;
+
+    $dicts = get_tw2cn_table();
+    foreach( $dicts as $key => $val ) {
+        $s = str_replace($key,$val,$s);
+    }
+
     $s2 = '';
     if( $mb ) {
         $n = mb_strlen($s);
