@@ -35,10 +35,6 @@ function to_tw($s,$mb = true) {
     $big5 = <?= var_export($big5,true) ?>;
     $cn   = <?= var_export($cn,true) ?>;
 
-    $dicts = get_cn2tw_table();
-    foreach( $dicts as $key => $val ) {
-        $s = str_replace($key,$val,$s);
-    }
 
     $s2 = '';
     if( $mb ) {
@@ -53,6 +49,10 @@ function to_tw($s,$mb = true) {
             } else {
                 $s2 = $s2.$s1;
             }
+        }
+        $dicts = get_cn2tw_table();
+        foreach( $dicts as $key => $val ) {
+            $s2 = str_replace($key,$val,$s2);
         }
         return $s2;
     } else {
@@ -76,6 +76,10 @@ function to_tw($s,$mb = true) {
                 $s2=$s2.$s1;
             }
         }
+        $dicts = get_cn2tw_table();
+        foreach( $dicts as $key => $val ) {
+            $s2 = str_replace($key,$val,$s2);
+        }
         return $s2;
     }
 
@@ -86,9 +90,8 @@ function to_cn($s,$mb = true) {
     $cn   = <?= var_export($cn,true) ?>;
 
     $dicts = get_tw2cn_table();
-    foreach( $dicts as $key => $val ) {
+    foreach( $dicts as $key => $val )
         $s = str_replace($key,$val,$s);
-    }
 
     $s2 = '';
     if( $mb ) {
