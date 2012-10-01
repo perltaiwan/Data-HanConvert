@@ -12,6 +12,9 @@ my $sharedir = io->catdir($Bin, "..", "share");
 for my $file ($sharedir->all_files) {
     next unless $file->filename =~ /_hash\.json$/;
     my ($varname) = $file->filename =~ m/_(.+)_hash/;
+    if ($file->filename =~ /characters/) {
+        $varname .= "_characters";
+    }
     my $data = decode_json($file->slurp);
 
     my $dumper = Data::Dumper->new([$data], ["\$Data::HanConvert::${varname}"]);
