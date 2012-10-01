@@ -9,7 +9,6 @@ overwritten after the program is done.
 
 use strict;
 use warnings;
-
 use FindBin;
 use IO::All;
 use Cwd qw(realpath);
@@ -17,21 +16,27 @@ use JSON qw(encode_json);
 
 my $dist_root = realpath( io->catdir($FindBin::Bin, "..") );
 
-my $txt_io = io->catfile($dist_root, "src", "hanconvert.txt")->utf8->chomp;
-
-my $hanconvert_array = [];
-while(defined(my $line = $txt_io->getline)) {
-    next if $line =~ /^(#|\s*$)/;
-    my ($tc, $sc) = split " ", $line;
-    push @$hanconvert_array, [$tc, $sc];
+sub build_hash {
+    my ($io) = @_;
+    my $array = [];
+    while (defined(my $line = $io->getline)) {
+        next if $line =~ /^(#|\s*$)/;
+        my ($tc, $sc) = split " ", $line;
+        push @$array, [$tc, $sc];
+    }
+    my $t2s = {};
+    my $s2t = {};
+    for (@$array) {
+        $t2s->{$_->[0]} = $_->[1];
+        $s2t->{$_->[1]} = $_->[0];
+    }
+    return ($t2s, $s2t);
 }
 
-my $t2s = {};
-my $s2t = {};
-for(@$hanconvert_array) {
-    $t2s->{$_->[0]} = $_->[1];
-    $s2t->{$_->[1]} = $_->[0];
-}
-
+my ($t2s, $s2t) = build_hash io->catfile($dist_root, "src", "hanconvert.txt")->utf8->chomp;
 io->catfile($dist_root, "share", "hanconvert_tw2cn_hash.json")->print(encode_json($t2s));
 io->catfile($dist_root, "share", "hanconvert_cn2tw_hash.json")->print(encode_json($s2t));
+
+($t2s, $s2t) = build_hash io->catfile($dist_root, "src", "characters.txt")->utf8->chomp;
+io->catfile($dist_root, "share", "characters_tw2cn_hash.json")->print(encode_json($t2s));
+io->catfile($dist_root, "share", "characters_cn2tw_hash.json")->print(encode_json($s2t));
