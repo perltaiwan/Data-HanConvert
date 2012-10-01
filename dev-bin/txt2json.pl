@@ -26,8 +26,6 @@ while(defined(my $line = $txt_io->getline)) {
     push @$hanconvert_array, [$tc, $sc];
 }
 
-io->catfile($dist_root, "share", "hanconvert_array.json")->print(encode_json($hanconvert_array));
-
 my $t2s = {};
 my $s2t = {};
 for(@$hanconvert_array) {
