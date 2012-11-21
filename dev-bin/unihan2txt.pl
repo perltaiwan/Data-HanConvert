@@ -50,6 +50,11 @@ while(defined(my $line = $uv_io->getline)) {
     }
 }
 
+# blacklist;
+delete @mappings{
+    "闆 板",
+};
+
 for (sort keys %mappings) {
     $char_io->println($_);
 }
