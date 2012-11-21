@@ -371,6 +371,3 @@
 ### for disambiguation
 化干戈為玉帛    化干戈为玉帛
 於午餐和晚餐時段    于午餐和晚餐时段
-
-## prevent over-convert
-平板 平板
