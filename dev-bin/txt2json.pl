@@ -27,12 +27,23 @@ sub build_hash {
         my ($tc, $sc) = split " ", $line;
         push @$array, [$tc, $sc];
     }
+    my @t2s_multi;
+    my @s2t_multi;
     my $t2s = {};
     my $s2t = {};
     for (@$array) {
-        $t2s->{$_->[0]} = $_->[1];
-        $s2t->{$_->[1]} = $_->[0];
+        my ($t,$s) = @$_;
+        if ($t2s->{$t}) {
+            push @t2s_multi, $t;
+        }
+        if ($s2t->{$s}) {
+            push @s2t_multi, $s;
+        }
+        $t2s->{$t} = $s;
+        $s2t->{$s} = $t;
     }
+    delete @{$t2s}{@t2s_multi};
+    delete @{$s2t}{@s2t_multi};
     return ($t2s, $s2t);
 }
 
