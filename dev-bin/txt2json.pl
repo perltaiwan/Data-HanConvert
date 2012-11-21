@@ -12,7 +12,10 @@ use warnings;
 use FindBin;
 use IO::All;
 use Cwd qw(realpath);
-use JSON qw(encode_json);
+use JSON ();
+
+my $json = JSON->new->utf8->pretty;
+sub encode_json { $json->encode(@_) }
 
 my $dist_root = realpath( io->catdir($FindBin::Bin, "..") );
 
