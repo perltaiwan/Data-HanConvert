@@ -50,12 +50,11 @@ while(defined(my $line = $uv_io->getline)) {
     }
 }
 
-# blacklist
-delete @mappings{
-    "闆 板",
-    "穀 谷",
-};
+my %traditional_characters;
+@traditional_characters{ split(/\s/, io("src/traditional_characters.txt")->utf8->all) } = ();
 
-for (sort keys %mappings) {
-    $char_io->println($_);
+for my $mapping (sort keys %mappings) {
+    my ($t, $s) = split /\s/, $mapping;
+    next if exists $traditional_characters{$s};
+    $char_io->println($mapping);
 }
