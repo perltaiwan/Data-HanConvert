@@ -51,6 +51,6 @@ my ($t2s, $s2t) = build_hash io->catfile($dist_root, "src", "hanconvert.txt")->u
 io->catfile($dist_root, "share", "hanconvert_tw2cn_hash.json")->print(encode_json($t2s));
 io->catfile($dist_root, "share", "hanconvert_cn2tw_hash.json")->print(encode_json($s2t));
 
-($t2s, $s2t) = build_hash io->catfile($dist_root, "src", "characters.txt")->utf8->chomp;
+($t2s, $s2t) = build_hash io->catfile($dist_root, "src", "characters_singlevariant.txt")->utf8->chomp;
 io->catfile($dist_root, "share", "characters_tw2cn_hash.json")->print(encode_json($t2s));
 io->catfile($dist_root, "share", "characters_cn2tw_hash.json")->print(encode_json($s2t));
