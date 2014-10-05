@@ -6,7 +6,7 @@ use Data::Dumper;
 use Data::Dump qw(dump);
 use FindBin qw($Bin);
 
-my $libdir   = io->catdir($Bin, "..", "dists", "cpan", "lib");
+my $libdir   = io->catdir($Bin, "..", "lib");
 my $sharedir = io->catdir($Bin, "..", "share");
 
 for my $file ($sharedir->all_files) {
@@ -15,7 +15,8 @@ for my $file ($sharedir->all_files) {
     if ($file->filename =~ /characters/) {
         $varname .= "_characters";
     }
-    my $data = decode_json($file->slurp);
+    say STDERR "## decoding $file";
+    my $data = decode_json(scalar $file->slurp);
 
     my $dumper = Data::Dumper->new([$data], ["\$Data::HanConvert::${varname}"]);
     $dumper->Indent(0);
