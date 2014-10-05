@@ -1,4 +1,10 @@
 ---
+version: 1.5
+date:    Sun Oct  5 23:20:45 CEST 2014
+changes:
+- with latest updates of character mapping table from Unicode 7.0
+
+---
 version: 1.4
 date:    Sun Oct  5 16:39:40 CEST 2014
 changes:
