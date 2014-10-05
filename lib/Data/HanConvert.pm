@@ -1,2 +1,2 @@
 package Data::HanConvert;
-our $VERSION = '0.3';
+our $VERSION = '1.4';

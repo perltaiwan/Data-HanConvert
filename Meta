@@ -1,12 +1,13 @@
 =meta: 0.0.2
 
 name: Data-HanConvert
-version: 0.3
+version: 1.4
 abstract: Chinese Data in Code
 homepage: https://metacpan.org/release/Data-HanConvert
 language: perl
 license: perl
 copyright: 2014
+branch: zilla-dist
 
 author:
   name: Kang-min Liu
