@@ -10,16 +10,14 @@ copyright: 2014
 
 author:
   name: Kang-min Liu
-  email: gugod@cpan.org
-  homepage: http://gugod.net
+  email: gugod@gugod.org
+  homepage: https://gugod.org
   github: gugod
   twitter: gugod
-  freenode: gugod
 
 devel:
   git: https://github.com/ingydotnet/Data-HanConvert
   bug: https://github.com/ingydotnet/Data-HanConvert/issues
-  irc: irc.freenode.net#pkg
 
 requires:
   perl: 5.8.1
